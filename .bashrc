@@ -128,5 +128,5 @@ alias cdw='cd /home/nitesh/work/fog-network'
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-export PS1="\[\e[94m\]\w \[\e[92m\]\$(parse_git_branch)\[\e[00m\]\n$ "
+export PS1="\[\e[90m\]\h:\[\e[94m\]\w \[\e[92m\]\$(parse_git_branch)\[\e[00m\]\n$ "
 
