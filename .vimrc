@@ -37,6 +37,10 @@ endif
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
 "if has("autocmd")
@@ -61,27 +65,56 @@ endif
 
 so ~/.vim/plugins.vim
 
-syntax enable  
-set number
+set relativenumber 
 
 set cursorline
 hi cursorline cterm=none term=none
 
-set termguicolors
-colorscheme gruvbox 
-set bg=dark
+"Commenting the terminal gui color out made colors better for some reason
+"set termguicolors
+"
 
+"colorscheme gruvbox 
+"set bg=dark
+"let g:gruvbox_contrast_dark="low"
+
+colorscheme spacegray 
+
+
+set laststatus=2
+"let g:lightline = {
+"	\ 'colorscheme':'gruvbox',
+"	\ }
+
+"Making it use 4 space for tabs instead of 8
 set tabstop=4
 set softtabstop=0 noexpandtab
 set shiftwidth=4
 
+" Enables the mouse for all modes
+set mouse=a
+
+" Enables incremental search (search as we are typing) 
 set incsearch
+
+" Making space the leader key because it is the most convinent key on the
+" board
+let mapleader = " "
+" space + f makes me search 
+nnoremap <leader>f :Files<CR> 
+nnoremap <leader>tv :vertical terminal<CR> 
+nnoremap <leader>ts :terminal<CR> 
+nnoremap <leader>vs :vs<CR>
+nnoremap <leader>sp :sp<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
 
 " Code for highlighting NOTE TODO etc.
 
 if has("autocmd")
 	if v:version > 701
 		autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|BUG\|HACK\)')
-		autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+		autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|DEBUG\)')
 	endif
 endif
